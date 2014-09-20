@@ -107,7 +107,7 @@ struct MyCar: Vehicle {
 }*/
 
 // 4. Sequence
-class ReverseGenerator: GeneratorSequence {
+class ReverseGenerator: GeneratorType {
     
     typealias Element = Int
     
@@ -139,12 +139,105 @@ class ReverseGenerator: GeneratorSequence {
     }
 }*/
 
+// 多元组(Tuple)
+var num = 42
+println(num)
+println(num.0.0.0.0.0.0.0.0.0.0.0)
+
+// @autoclosure 和 ??
+func logIfTrue(predict: @autoclosure () -> Bool) {
+    if predict() {
+        println("true")
+    }
+}
+
+logIfTrue(2 > 1)
+
+var level: Int?
+var startLevel = 1
+var currentLevel = level ?? startLevel
 
 
+// 操作符
+struct Vector2D {
+    var x = 0.0
+    var y = 0.0
+}
+
+func +(left: Vector2D, right: Vector2D) -> Vector2D {
+    return Vector2D(x: left.x + right.x, y: left.y + right.y)
+}
+
+var v1 = Vector2D(x: 1.0, y: 2.0)
+var v2 = Vector2D(x: 3.0, y: 4.0)
+var v3 = v1 + v2
+
+func -(left: Vector2D, right: Vector2D) -> Vector2D {
+    return Vector2D(x: left.x - right.x, y: left.y - right.y)
+}
+var v4 = v2 - v1
+
+prefix func -(pre: Vector2D) -> Vector2D {
+    return Vector2D(x: -pre.x, y: -pre.y)
+}
+var v5 = -v2
 
 
+infix operator +* {
+    associativity none
+    precedence 160
+}
+
+func +* (left: Vector2D, right: Vector2D) -> Double {
+    return left.x * right.x + left.y * right.y
+}
+
+var v6 = v1 +* v2
+
+// func 的参数修饰, func 参数的默认修饰符是 let
+func incrementor(inout variable: Int) {
+    ++variable
+}
+
+var luckyNumber = 7
+incrementor(&luckyNumber)
+
+println(luckyNumber)
 
 
+// 方法参数名称省略
+extension NSURL: StringLiteralConvertible {
+    
+    public class func convertFromStringLiteral(value: String) -> Self {
+        
+        if let url = self(string: value) {
+            return url
+        }
+        
+        fatalError("Bad URL")
+    }
+    
+    public class func convertFromExtendedGraphemeClusterLiteral(value: String) -> Self {
+        
+        if let url = self(string: value) {
+            return url
+        }
+        
+        fatalError("Bad URL")
+    }
+}
+
+let url: NSURL = "http://swifter.tips"
+
+// 下标
+extension Array {
+    
+    subscript(intput: [Int]) -> Slice<T> {
+        get {
+            
+        }
+    }
+}
 
 
 
