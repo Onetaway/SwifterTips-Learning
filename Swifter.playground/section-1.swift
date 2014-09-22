@@ -206,7 +206,7 @@ println(luckyNumber)
 
 
 // 方法参数名称省略
-extension NSURL: StringLiteralConvertible {
+/*extension NSURL: StringLiteralConvertible {
     
     public class func convertFromStringLiteral(value: String) -> Self {
         
@@ -237,7 +237,107 @@ extension Array {
             
         }
     }
+}*/
+
+
+
+// 方法嵌套，可以在方法中定义方法
+
+// 传统做法
+/*func appendQuery(var url: String,
+                     key: String,
+                   value: AnyObject) -> String {
+    
+    if let dictionary = value as? [String: AnyObject] {
+        
+        return appendQueryDictionary(url, key, dictionary)
+    } else if let array = value as? [AnyObject] {
+        return appendQueryArray(url, key, array)
+    } else {
+        appendQuerySingle(url, key, value)
+    }
+    
+}*/
+
+func methodA(number: Int?) -> Int {
+    
+    if let n = number {
+        return n
+    } else if let p = number {
+        return p
+    } else {
+        return 3
+    }
 }
+
+func appendQueryDictionary(var url: String, key: String, value: [String: AnyObject]) -> String {
+    
+    var result: String = "a"
+    // do something...
+    return result
+}
+
+func appendQueryArray(var url: String, key: String, value: [AnyObject]) -> String {
+    
+    var result: String = "bbb"
+    // do something
+    return result
+}
+
+func appendQuerySingle(var url: String, key: String, value: AnyObject) -> String {
+    
+    var result: String = "ccc"
+    // do something
+    return result
+}
+
+// 方法嵌套做法
+/*
+func appendQueryNew(var url: String, key: String,value: AnyObject) -> String {
+    
+    func appendQueryDictionaryNew(var url: String, key: String, value: [String: AnyObject]) -> String {
+        
+        var result: String?
+        // do something
+        return result!
+    }
+    
+    func appendQueryArrayNew(var url: String, key: String, value: [AnyObject]) -> String {
+        
+        var result: String?
+        // do something
+        return result!
+    }
+    
+    func appendQuerySingleNew(var url: String, key: String, value: AnyObject) -> String {
+        
+        var result: String?
+        // do something
+        return result!
+    }
+    
+    if let dictionary = value as? [String: AnyObject] {
+        
+        return appendQueryDictionaryNew(url, key, dictionary)
+    } else if let array = value as? [AnyObject] {
+        return appendQueryArrayNew(url, key, array)
+    } else {
+        appendQuerySingleNew(url, key, value)
+    }
+
+}*/
+
+// 实例方法的动态调用
+class MyClass {
+    func method(number: Int) -> Int {
+        return number + 1
+    }
+}
+
+let f = MyClass.method
+let object = MyClass()
+let result = f(object)(1)
+println(result)
 
 
 
