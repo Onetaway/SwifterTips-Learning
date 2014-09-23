@@ -1,6 +1,6 @@
 // Playground - noun: a place where people can play
 
-import UIKit
+//import UIKit
 
 // 1. Selector
 /*func callMe() {
@@ -338,6 +338,28 @@ let f = MyClass.method
 let object = MyClass()
 let result = f(object)(1)
 println(result)
+
+
+// 单例
+
+class MyManager {
+    
+    class var sharedManager: MyManager {
+        return sharedInstance
+    }
+}
+
+private let sharedInstance = MyManager()
+
+
+// Any 和 AnyObject
+let swiftInt = 1
+let swiftString = "miao"
+
+var array: [Any] = []
+array.append(swiftInt)
+array.append(swiftString)
+println(array)
 
 
 
