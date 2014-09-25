@@ -361,6 +361,20 @@ array.append(swiftInt)
 array.append(swiftString)
 println(array)
 
+// 初始化返回nil
+extension Int {
+    init?(string: String) {
+    if let i = string.toInt() {
+        self = i
+    } else {
+        return nil
+    }
+    }
+}
+
+class AAA {
+    class var a: Int?
+}
 
 
 
